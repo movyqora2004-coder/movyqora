@@ -2,20 +2,15 @@ services:
   - type: web
     name: movyqora
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm ci
-    startCommand: npm start
-    disk:
-      name: movyqora-videos
-      mountPath: /var/data/uploads
-      sizeGB: 20
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: movyqora-db
           property: connectionString
       - key: UPLOAD_DIR
-        value: /var/data/uploads
+        value: ./uploads
       - key: SESSION_SECRET
         sync: false
       - key: ADMIN_EMAIL
