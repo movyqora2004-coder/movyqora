@@ -1,0 +1,27 @@
+<header class="nav">
+  <div class="nav-left">
+    <button id="menuBtn" class="icon-btn" aria-label="Open menu">☰</button>
+    <a class="brand" href="/"><span class="playmark">▷</span><span>MOVY<span>QORA</span></span></a>
+  </div>
+  <nav class="desktop-nav">
+    <a href="/" class="active">Home</a>
+    <a href="/?q=movie">Movies</a>
+    <a href="/?q=series">Series</a>
+    <a href="/?q=anime">Anime</a>
+    <a href="/#genres">Genres</a>
+    <% if(user && (user.role==='admin'||user.role==='uploader')){ %><a href="/upload">Upload</a><% } %>
+    <% if(user && user.role==='admin'){ %><a href="/admin">Admin</a><% } %>
+  </nav>
+  <div class="nav-actions">
+    <a class="search-icon" href="/#search" aria-label="Search">⌕</a>
+    <% if(user){ %>
+      <span class="hello"><%= user.name %></span>
+      <form method="post" action="/logout"><button class="btn ghost">Sign Out</button></form>
+    <% } %>
+  </div>
+</header>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="/">Home</a><a href="/?q=movie">Movies</a><a href="/?q=series">Series</a><a href="/?q=anime">Anime</a><a href="/#genres">Genres</a>
+  <% if(user && (user.role==='admin'||user.role==='uploader')){ %><a href="/upload">Upload</a><% } %>
+  <% if(user && user.role==='admin'){ %><a href="/admin">Admin</a><% } %>
+</div>
