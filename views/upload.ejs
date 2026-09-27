@@ -1,0 +1,11 @@
+<%- include('partials-head', {title:'MOVYQORA — Upload'}) %><%- include('partials-nav', {user}) %>
+<main class="page"><div class="page-title"><span class="pill gold">UPLOAD CENTER</span><h1>Upload Content</h1><p>Only Admin and approved Uploaders can access this page.</p></div>
+<%if(flash){%><div class="flash <%=flash.type%>"><%=flash.message%></div><%}%>
+<form id="uploadForm" class="upload-form" method="post" action="/upload" enctype="multipart/form-data">
+<div class="form-grid"><label>Title<input name="title" required placeholder="Movie / Series / Anime title"></label><label>Type<select name="type" required><option value="movie">Movie</option><option value="series">Web Series</option><option value="anime">Anime</option></select></label><label>Genre<input name="genre" list="genres" required placeholder="Action, Horror..."><datalist id="genres"><%genres.forEach(g=>{%><option value="<%=g%>"><%})%></datalist></label><label>Year<input name="year" type="number" min="1900" max="2100"></label></div>
+<label>Description<textarea name="description" rows="4" placeholder="Short description shown on the watch page"></textarea></label>
+<div class="form-grid"><label>Poster URL<input name="poster_url" placeholder="https://..."></label><label>Backdrop URL<input name="backdrop_url" placeholder="https://..."></label></div>
+<h3>Quality Files</h3><p class="muted">Upload one or more authorized MP4/WebM files. Users can choose the available quality while watching.</p>
+<div class="quality-grid"><label><b>360p</b><input type="file" name="q360" accept="video/mp4,video/webm,video/*"></label><label><b>480p</b><input type="file" name="q480" accept="video/mp4,video/webm,video/*"></label><label><b>720p</b><input type="file" name="q720" accept="video/mp4,video/webm,video/*"></label><label><b>1080p</b><input type="file" name="q1080" accept="video/mp4,video/webm,video/*"></label></div>
+<div class="progress-wrap"><div class="progress"><i id="uploadProgress"></i></div><div id="uploadStats">Ready to upload.</div></div>
+<button class="btn gold" type="submit">⬆ Upload Content</button></form></main><script src="/app.js"></script></body></html>
