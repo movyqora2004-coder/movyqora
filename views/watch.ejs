@@ -1,0 +1,20 @@
+<%- include('partials-head', {title:title.title+' — MOVYQORA'}) %><%- include('partials-nav', {user}) %>
+<main class="watch page"><a class="back" href="/">← Back to Home</a>
+<div class="watch-layout">
+<section>
+  <div class="player"><video id="player" controls playsinline preload="metadata"><source src="/video/<%=videos[0]?.id%>/stream"></video></div>
+  <div class="playerbar">
+    <label class="quality-label">Quality <select id="quality"><%videos.forEach(v=>{ %><option value="<%=v.id%>"><%=v.quality%> · <%=Math.max(1,Math.round(v.size_bytes/1024/1024))%> MB</option><% }) %></select></label>
+    <button class="btn" id="likeBtn">♥ <span id="likeCount"><%=title.likes%></span></button>
+    <button class="btn" id="downloadBtn">⇩ Download</button><span class="views">◉ <%=Number(title.views)+1%> views</span>
+  </div>
+</section>
+<aside class="details">
+  <span class="pill gold"><%=title.type.toUpperCase()%></span><h1><%=title.title%></h1><p><%=title.description%></p>
+  <div class="meta"><span><%=title.year||'—'%></span><span><%=title.genre%></span></div>
+  <div class="watch-note">Choose your preferred quality before streaming or downloading. Your browser/Android download manager handles the actual file transfer.</div>
+</aside>
+</div>
+<section class="comments"><h2>Comments</h2><form id="commentForm"><textarea id="commentBody" placeholder="Write a comment..." required></textarea><button class="btn gold">Post Comment</button></form><div id="commentList"><%comments.forEach(c=>{ %><article><b><%=c.name%></b><small><%=new Date(c.created_at).toLocaleString()%></small><p><%=c.body%></p></article><% }) %></div></section>
+</main>
+<script>window.TITLE_ID=<%=title.id%>;window.VIDEOS=<%-JSON.stringify(videos)%>;window.LIKED=<%=title.liked?'true':'false'%>;</script><script src="/app.js"></script></body></html>
